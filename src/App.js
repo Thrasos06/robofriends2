@@ -8,8 +8,8 @@ function App() {
   const [robots, setRobots] = useState();
   const [searchfield, setSearchfield] = useState("");
   const [buttonText, setButtonText] = useState("set=set1");
-  const [bgColor1, setBgColor1] = useState();
-  const [bgColor2, setBgColor2] = useState();
+  const [bgColor1, setBgColor1] = useState("#4880EC");
+  const [bgColor2, setBgColor2] = useState("#019CAD");
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -27,18 +27,46 @@ function App() {
 
   return (
     <div
-      className="App"
-      style={{ backgroundImage: "linear-gradient(to right, #4880EC, #019CAD)" }}
+      className="tc App"
+      style={{
+        backgroundImage:
+          "linear-gradient(to right," + bgColor1 + "," + bgColor2 + ")",
+      }}
     >
       <div className="button-container">
-        <button onClick={() => setButtonText("set=set1")}>ROBOTS</button>
-        <button onClick={() => setButtonText("set=set2")}>MONSTERS</button>
-        <button onClick={() => setButtonText("set=set4")}>KITTENS</button>
+        <button
+          onClick={() => {
+            setButtonText("set=set1");
+            setBgColor1("#4880EC");
+            setBgColor2("#019CAD");
+          }}
+        >
+          ROBOTS
+        </button>
+        <button
+          onClick={() => {
+            setButtonText("set=set2");
+            setBgColor1("#1f1f1f");
+            setBgColor2("#3f1819");
+          }}
+        >
+          MONSTERS
+        </button>
+        <button
+          onClick={() => {
+            setButtonText("set=set4");
+            setBgColor1("#f25f70");
+            setBgColor2("#a25075");
+          }}
+        >
+          KITTENS
+        </button>
       </div>
       <h1 className="f1">RoboFriends</h1>
       <Searchbar onSearchChange={onSearchChange} />
-
-      <CardList robots={filteredRobots} buttonText={buttonText} />
+      <Scroll>
+        <CardList robots={filteredRobots} buttonText={buttonText} />
+      </Scroll>
     </div>
   );
 }
